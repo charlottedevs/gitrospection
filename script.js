@@ -52,12 +52,23 @@ const appendStats = totals => {
   return totals
 }
 
+const reposUrl = 'https://api.github.com/users/%USER%/repos?type=owner'
 
-const reposUrl = 'https://api.github.com/users/binarymason/repos?type=owner'
-fetch(reposUrl)
-  .then(response => response.json())
-  .then(fetchLanguages)
-  .then(calculateTotals)
-  .then(calculatePercentages)
-  .then(appendStats)
-  .catch(e => console.log(e))
+function getUserData(url) {
+  fetch(url)
+    .then(response => response.json())
+    .then(fetchLanguages)
+    .then(calculateTotals)
+    .then(calculatePercentages)
+    .then(appendStats)
+    .catch(e => console.log(e));
+}
+
+$(document).ready(function() {
+  $('#github-user').bind('blur keyup', function(event) {
+    if (event.type === 'blur' || event.keyCode === 13) {
+      let userReposUrl = reposUrl.replace('%USER%', $(this).val());
+      getUserData(userReposUrl);
+    }
+  });
+});
