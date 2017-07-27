@@ -1,8 +1,3 @@
-const createNode = el => document.createElement(el);
-const appendNode = (parent, el) => parent.appendChild(el);
-const ul = document.getElementById('repos');
-
-
 const fetchLanguages = json => {
   return json.map(repo => {
     return fetch(repo.languages_url)
@@ -32,7 +27,6 @@ const calculateTotals = languages => {
 
 const calculatePercentages = totals => {
   let totalBytes = Object.values(totals).reduce((sum, value) => sum + value)
-  console.log('totalBytes: ' + totalBytes)
 
   Object.keys(totals).map(k => {
     totals[k] = Number(totals[k] / totalBytes).toFixed(4)
@@ -41,15 +35,25 @@ const calculatePercentages = totals => {
   return totals
 }
 
-const appendStats = totals => {
-  Object.keys(totals).map(k => {
-    let li = createNode('li')
+const transformData = totals => {
+  return {
+    datasets: [{
+      data: Object.values(totals),
+      label: 'Programming Languages'
+    }],
+    labels: Object.keys(totals)
+  }
+}
 
-    li.innerHTML = `${k}: ${totals[k]}`
-    appendNode(ul, li)
-  })
-
-  return totals
+const updateChart = data => {
+  console.log(data)
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    // add background color in another iteration
+    options: {}
+});
 }
 
 const reposUrl = 'https://api.github.com/users/%USER%/repos?type=owner'
@@ -60,7 +64,8 @@ function getUserData(url) {
     .then(fetchLanguages)
     .then(calculateTotals)
     .then(calculatePercentages)
-    .then(appendStats)
+    .then(transformData)
+    .then(updateChart)
     .catch(e => console.log(e));
 }
 
