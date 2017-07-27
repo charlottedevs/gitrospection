@@ -51,7 +51,14 @@ const updateChart = data => {
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: data,
-    // add background color in another iteration
+    backgroundColor: [
+      'rgba(112, 21, 22, 0.2)', // ruby
+      'rgba(227, 76, 38, 0.2)', // html
+      'rgba(241, 224, 90, 0.2)', // js
+      'rgba(86, 61, 124, 0.2)', // css
+      'rgba(137, 224, 81, 0.2)', // shell
+      'rgba(36, 71, 118, 0.2)' // coffeescript
+    ],
     options: {}
 });
 }
