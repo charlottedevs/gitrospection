@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
-
-const app = express();
+const express = require('express'),
+ config = require('./config'),
+ path = require('path'),
+ app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -9,6 +9,4 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-const PORT = 8080;
-const HOST = '0.0.0.0';
-app.listen(PORT, HOST);
+app.listen(config.port, config.host, () => console.log(`App running on localhost:${config.port}`));
