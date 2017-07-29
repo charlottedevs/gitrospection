@@ -77,10 +77,14 @@ function getUserData(url) {
 }
 
 $(document).ready(function() {
-  $('#github-user').bind('blur keyup', function(event) {
-    if (event.type === 'blur' || event.keyCode === 13) {
-      let userReposUrl = reposUrl.replace('%USER%', $(this).val());
-      getUserData(userReposUrl);
+  $('#github-user').bind('keyup', function(event) {
+    if (event.keyCode === 13) {
+      $('#github-submit').click();
     }
+  });
+
+  $('#github-submit').click(function() {
+    let userReposUrl = reposUrl.replace('%USER%', $(this).val());
+    getUserData(userReposUrl);
   });
 });
