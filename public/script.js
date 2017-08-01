@@ -84,7 +84,7 @@ $(document).ready(function() {
   });
 
   $('#github-submit').click(function() {
-    let userReposUrl = reposUrl.replace('%USER%', $(this).val());
+    let userReposUrl = reposUrl.replace('%USER%', $('#github-user').val());
     getUserData(userReposUrl);
   });
 });
