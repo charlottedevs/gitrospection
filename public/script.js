@@ -63,7 +63,7 @@ const updateChart = data => {
 });
 }
 
-const reposUrl = 'https://api.github.com/users/%USER%/repos?type=owner'
+const reposUrl = '/users/%USER%/repos'
 
 function getUserData(url) {
   fetch(url)
