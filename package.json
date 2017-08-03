@@ -18,6 +18,7 @@
   "homepage": "https://github.com/charlottejuniordevs/gitrospection#readme",
   "dependencies": {
     "express": "^4.15.3",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "streaming-cache": "^0.5.1"
   }
 }
