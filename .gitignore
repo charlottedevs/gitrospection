@@ -3,3 +3,4 @@ npm-debug.log
 
 # ignore all swp files
 *.swp/
+tmp

@@ -10,12 +10,8 @@ author="$3"
 
 mkdir tmp 2&>/dev/null
 repo_destination="./tmp/$repo"
-# rm -rf "$repo_destination"
+rm -rf "$repo_destination"
 git clone --bare "git@github.com:$handle/$repo.git" "$repo_destination"
 
 cd "$repo_destination" || echo "bad repo: $repo_destination"
-git --no-pager log --author="\(mace2345@gmail.com\)\|\($author\)" --pretty="" --numstat --no-merges
-# for i in $(git --no-pager log --author="$author" --pretty="" --numstat --no-merges); do
-#   echo "$i"
-# done
-
+git --no-pager log --author="\(mace2345@gmail.com\)\|\($author\)" --pretty="" --numstat --no-merges | node ~/code/clt/gitrospection/stream.js

@@ -1,3 +1,8 @@
+// issues:
+// 1) ignore common gitignored files?
+// 2) just search by author handle
+// 3) just git log back to last date of GitHub events
+//
 const yaml = require('js-yaml');
 const fs   = require('fs');
 
@@ -36,7 +41,7 @@ const parseStats = lines => (
 
     const lang = findLanguage(file);
 
-    // not supporting languages not in config/languages.yml
+    // ignore languages not in config/languages.yml
     if (!lang) return true;
 
     const added = Number(diff[0]);
